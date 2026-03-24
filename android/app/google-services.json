@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "473018387336",
+    "project_id": "myapplication-10-58a1a",
+    "storage_bucket": "myapplication-10-58a1a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473018387336:android:c22347a5c770a945cb883d",
+        "android_client_info": {
+          "package_name": "com.android.hp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473018387336-ui5alpiomaeh92ba2v1g4u8476vukes3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT1jlXJXd_44nrBturPyMMLNkvFycQ5Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473018387336-ui5alpiomaeh92ba2v1g4u8476vukes3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473018387336:android:f42b762940154278cb883d",
+        "android_client_info": {
+          "package_name": "com.example.latihan_firebase10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473018387336-ui5alpiomaeh92ba2v1g4u8476vukes3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT1jlXJXd_44nrBturPyMMLNkvFycQ5Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473018387336-ui5alpiomaeh92ba2v1g4u8476vukes3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473018387336:android:7f15de1fb9ec3a0fcb883d",
+        "android_client_info": {
+          "package_name": "com.example.papua_career_center"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473018387336-ui5alpiomaeh92ba2v1g4u8476vukes3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT1jlXJXd_44nrBturPyMMLNkvFycQ5Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473018387336-ui5alpiomaeh92ba2v1g4u8476vukes3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
