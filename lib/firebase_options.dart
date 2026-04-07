@@ -41,50 +41,52 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBP-HVp53NlZqEqdcTVGIwGMQd8bZf5d1Q',
-    appId: '1:473018387336:web:af679eb119410353cb883d',
-    messagingSenderId: '473018387336',
-    projectId: 'myapplication-10-58a1a',
-    authDomain: 'myapplication-10-58a1a.firebaseapp.com',
-    storageBucket: 'myapplication-10-58a1a.firebasestorage.app',
-    measurementId: 'G-LKTNW4N5E7',
+    apiKey: 'AIzaSyAo6w29D2VVK4f-xuE3dFqrr3yFtKD4myA',
+    appId: '1:671959676521:web:3cff328957a3026465d4f8',
+    messagingSenderId: '671959676521',
+    projectId: 'anak-mudah-papua',
+    authDomain: 'anak-mudah-papua.firebaseapp.com',
+    storageBucket: 'anak-mudah-papua.firebasestorage.app',
+    measurementId: 'G-KFHHVMMJVB',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCT1jlXJXd_44nrBturPyMMLNkvFycQ5Uk',
-    appId: '1:473018387336:android:7f15de1fb9ec3a0fcb883d',
-    messagingSenderId: '473018387336',
-    projectId: 'myapplication-10-58a1a',
-    storageBucket: 'myapplication-10-58a1a.firebasestorage.app',
+    apiKey: 'AIzaSyA7OwRMZbu_NVhW6ISW35-qnGnAZEEeP4o',
+    appId: '1:671959676521:android:b00477f085395db865d4f8',
+    messagingSenderId: '671959676521',
+    projectId: 'anak-mudah-papua',
+    storageBucket: 'anak-mudah-papua.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCmESsUK2U3rvlpJ88fi4VoDFIFlmoJbGk',
-    appId: '1:473018387336:ios:548011620ea04b53cb883d',
-    messagingSenderId: '473018387336',
-    projectId: 'myapplication-10-58a1a',
-    storageBucket: 'myapplication-10-58a1a.firebasestorage.app',
-    iosClientId: '473018387336-o72v53bvtdq3s69bdiuvgdpchj24rs4t.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAUB0LmVOmE3aZWyfiwRymhUP-HBcauWls',
+    appId: '1:671959676521:ios:00a7c1322da86e3765d4f8',
+    messagingSenderId: '671959676521',
+    projectId: 'anak-mudah-papua',
+    storageBucket: 'anak-mudah-papua.firebasestorage.app',
+    iosClientId:
+        '671959676521-lunqhv3q40steflb6s3leii71puikj25.apps.googleusercontent.com',
     iosBundleId: 'com.example.papuaCareerCenter',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCmESsUK2U3rvlpJ88fi4VoDFIFlmoJbGk',
-    appId: '1:473018387336:ios:548011620ea04b53cb883d',
-    messagingSenderId: '473018387336',
-    projectId: 'myapplication-10-58a1a',
-    storageBucket: 'myapplication-10-58a1a.firebasestorage.app',
-    iosClientId: '473018387336-o72v53bvtdq3s69bdiuvgdpchj24rs4t.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAUB0LmVOmE3aZWyfiwRymhUP-HBcauWls',
+    appId: '1:671959676521:ios:00a7c1322da86e3765d4f8',
+    messagingSenderId: '671959676521',
+    projectId: 'anak-mudah-papua',
+    storageBucket: 'anak-mudah-papua.firebasestorage.app',
+    iosClientId:
+        '671959676521-lunqhv3q40steflb6s3leii71puikj25.apps.googleusercontent.com',
     iosBundleId: 'com.example.papuaCareerCenter',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB-DjnWnM52Kkk5lU78tbI0R0nYG0JvgKo',
-    appId: '1:473018387336:web:0495a931f0a2569dcb883d',
-    messagingSenderId: '473018387336',
-    projectId: 'myapplication-10-58a1a',
-    authDomain: 'myapplication-10-58a1a.firebaseapp.com',
-    storageBucket: 'myapplication-10-58a1a.firebasestorage.app',
-    measurementId: 'G-HTJFY3ML7M',
+    apiKey: 'AIzaSyAo6w29D2VVK4f-xuE3dFqrr3yFtKD4myA',
+    appId: '1:671959676521:web:71d7fdb41047f68965d4f8',
+    messagingSenderId: '671959676521',
+    projectId: 'anak-mudah-papua',
+    authDomain: 'anak-mudah-papua.firebaseapp.com',
+    storageBucket: 'anak-mudah-papua.firebasestorage.app',
+    measurementId: 'G-BE8Y2LECK3',
   );
 }
