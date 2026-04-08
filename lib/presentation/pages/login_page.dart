@@ -19,14 +19,21 @@ class _LoginPageState extends State<LoginPage> {
   bool _isObscure = true; // 👁 toggle password
 
   void _handleLogin() async {
-    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+    // 1. Validasi Input Kosong
+    if (_emailController.text.trim().isEmpty ||
+        _passwordController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Email dan Password harus diisi")),
+        const SnackBar(
+          content: Text("Email dan Password harus diisi kaka!"),
+          backgroundColor: Colors.orange,
+          behavior: SnackBarBehavior.floating,
+        ),
       );
       return;
     }
 
     setState(() => _isLoading = true);
+
     try {
       await _authRepo.signIn(
         _emailController.text.trim(),
@@ -34,6 +41,17 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (mounted) {
+        // 2. Notifikasi Berhasil (Hijau)
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Mantap! Login Berhasil."),
+            backgroundColor: Colors.green,
+            behavior: SnackBarBehavior.floating,
+            duration: Duration(seconds: 2),
+          ),
+        );
+
+        // Pindah ke Halaman Home
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (c) => const HomePage()),
@@ -41,9 +59,16 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(e.toString())));
+        // 3. Notifikasi Gagal (Merah)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Login Gagal: Periksa kembali email dan password ko.",
+            ),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -138,9 +163,17 @@ class _LoginPageState extends State<LoginPage> {
                           child: ElevatedButton(
                             onPressed: _handleLogin,
                             style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue, // Warna tombol
+                              foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
-                            child: const Text("MASUK"),
+                            child: const Text(
+                              "MASUK",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
 
