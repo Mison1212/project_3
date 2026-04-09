@@ -5,15 +5,47 @@ import 'package:papua_career_center/presentation/pages/course_page.dart';
 import 'job_list_page.dart';
 import 'profile_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    // 🔥 Menampilkan notifikasi berhasil login setelah frame pertama selesai dirender
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Row(
+              children: [
+                Icon(Icons.check_circle, color: Colors.white),
+                SizedBox(width: 12),
+                Text("Mantap! Ko su berhasil masuk."),
+              ],
+            ),
+            backgroundColor: Colors.green.shade700,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // 🔥 HEADER MODERN + LOGO ASSETS
+          // HEADER MODERN + LOGO ASSETS
           SliverAppBar(
             expandedHeight: 200.0,
             floating: false,
@@ -51,11 +83,9 @@ class HomePage extends StatelessWidget {
                     end: Alignment.bottomRight,
                   ),
                 ),
-
-                // 🔥 GANTI ICON JADI IMAGE ASSETS
                 child: Center(
                   child: Opacity(
-                    opacity: 0.2, // biar jadi background halus
+                    opacity: 0.2,
                     child: Image.asset(
                       'assets/icon/image.png',
                       width: 120,

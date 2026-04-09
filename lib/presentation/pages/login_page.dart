@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../data/repositories/auth_repository.dart';
-import 'home_page.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,18 +15,39 @@ class _LoginPageState extends State<LoginPage> {
   final _authRepo = AuthRepository();
 
   bool _isLoading = false;
-  bool _isObscure = true; // 👁 toggle password
+  bool _isObscure = true;
+
+  // Fungsi Helper untuk menampilkan SnackBar
+  void _showNotif(String pesan, Color warna, IconData icon) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(icon, color: Colors.white),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(pesan, style: const TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+        backgroundColor: warna,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
 
   void _handleLogin() async {
-    // 1. Validasi Input Kosong
-    if (_emailController.text.trim().isEmpty ||
-        _passwordController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Email dan Password harus diisi kaka!"),
-          backgroundColor: Colors.orange,
-          behavior: SnackBarBehavior.floating,
-        ),
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    // 1. Validasi Input (Tetap perlu agar tidak mengirim data kosong ke Firebase)
+    if (email.isEmpty || password.isEmpty) {
+      _showNotif(
+        "Email dan Password harus diisi kaka!",
+        Colors.orange,
+        Icons.warning_amber_rounded,
       );
       return;
     }
@@ -35,42 +55,23 @@ class _LoginPageState extends State<LoginPage> {
     setState(() => _isLoading = true);
 
     try {
-      await _authRepo.signIn(
-        _emailController.text.trim(),
-        _passwordController.text.trim(),
-      );
+      // 2. Proses Login ke Firebase
+      // Jika ini berhasil, StreamBuilder di main.dart akan langsung
+      // memindahkan user ke HomePage secara otomatis.
+      await _authRepo.signIn(email, password);
 
-      if (mounted) {
-        // 2. Notifikasi Berhasil (Hijau)
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Mantap! Login Berhasil."),
-            backgroundColor: Colors.green,
-            behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 2),
-          ),
-        );
-
-        // Pindah ke Halaman Home
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (c) => const HomePage()),
-        );
-      }
+      // KITA KOSONGKAN DI SINI
+      // Tidak ada _showNotif sukses agar tidak tabrakan dengan transisi halaman.
     } catch (e) {
-      if (mounted) {
-        // 3. Notifikasi Gagal (Merah)
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Login Gagal: Periksa kembali email dan password ko.",
-            ),
-            backgroundColor: Colors.redAccent,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      }
+      // 3. Logika Gagal
+      // Jika kamu ingin benar-benar TIDAK ADA notifikasi merah sama sekali,
+      // kamu bisa mengosongkan bagian catch ini atau cukup print di console untuk debug.
+      debugPrint("Login gagal: $e");
+
+      // Jika ingin tetap ada notifikasi HANYA saat gagal (salah password/email),
+      // gunakan kode di bawah. Tapi jika ingin bersih total, hapus baris _showNotif ini:
     } finally {
+      // 4. Matikan loading jika gagal
       if (mounted) setState(() => _isLoading = false);
     }
   }
@@ -84,15 +85,15 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // 🔥 LOGO + SHADOW
+              // Logo dengan Shadow
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 10,
-                      offset: const Offset(0, 5),
+                      offset: Offset(0, 5),
                     ),
                   ],
                 ),
@@ -103,57 +104,52 @@ class _LoginPageState extends State<LoginPage> {
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Icon(
+                      Icons.business_center,
+                      size: 80,
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
               ),
-
               const SizedBox(height: 16),
-
-              // 🔥 TITLE
               const Text(
                 "Pusat Karir Papua",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 40),
 
-              // 🔹 EMAIL
+              // Field Email
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
                   labelText: "Email",
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: Icon(Icons.email_outlined),
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-
               const SizedBox(height: 16),
 
-              // 🔹 PASSWORD + ICON MATA 👁
+              // Field Password
               TextField(
                 controller: _passwordController,
                 obscureText: _isObscure,
                 decoration: InputDecoration(
                   labelText: "Password",
-                  prefixIcon: const Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock_outline),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isObscure ? Icons.visibility : Icons.visibility_off,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _isObscure = !_isObscure;
-                      });
-                    },
+                    onPressed: () => setState(() => _isObscure = !_isObscure),
                   ),
                 ),
               ),
-
               const SizedBox(height: 24),
 
-              // 🔹 BUTTON / LOADING
+              // Tombol Login / Loading
               _isLoading
                   ? const CircularProgressIndicator()
                   : Column(
@@ -163,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: ElevatedButton(
                             onPressed: _handleLogin,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue, // Warna tombol
+                              backgroundColor: Colors.blue[900],
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
@@ -176,10 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
-                        // 🔹 REGISTER
                         TextButton(
                           onPressed: () {
                             Navigator.push(
